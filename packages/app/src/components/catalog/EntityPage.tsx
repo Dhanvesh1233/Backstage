@@ -59,10 +59,6 @@ import {
   isKubernetesAvailable,
 } from '@backstage/plugin-kubernetes';
 
-import {
-  EntityCircleCIContent,
-  isCircleCIAvailable,
-} from '@circleci/backstage-plugin';
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -83,9 +79,8 @@ const cicdContent = (
       </EntitySwitch.Case>
      */}
 
-<EntitySwitch.Case if={isCircleCIAvailable}>     
-<EntityCircleCIContent />
- <EmptyState
+    <EntitySwitch.Case>
+      <EmptyState
         title="No CI/CD available for this entity"
         missing="info"
         description="You need to add an annotation to your component if you want to enable CI/CD for it. You can read more about annotations in Backstage by clicking the button below."
