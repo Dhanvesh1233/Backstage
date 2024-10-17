@@ -4,7 +4,7 @@ import {
   ScmAuth,
 } from '@backstage/integration-react';
 import {
-  
+  AnyApiFactory,
   configApiRef,
   createApiFactory,
 } from '@backstage/core-plugin-api';
