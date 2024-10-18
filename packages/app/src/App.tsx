@@ -37,6 +37,8 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { PluginPagePage } from 'backstage-plugin-plugin-page';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -106,6 +108,9 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+
+    {/* Add your plugin route */}
+    <Route path="/plugin-page" element={<PluginPagePage />} />
   </FlatRoutes>
 );
 

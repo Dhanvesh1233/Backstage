@@ -28,6 +28,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 
+// New icon for your plugin
+import PluginIcon from '@material-ui/icons/Extension'; // Use any Material-UI icon or custom
+
 const useSidebarLogoStyles = makeStyles({
   root: {
     width: sidebarConfig.drawerWidthClosed,
@@ -75,6 +78,9 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+
+        {/* Add your plugin here */}
+        <SidebarItem icon={PluginIcon} to="/plugin-page" text="My Plugin" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
