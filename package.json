@@ -55,6 +55,7 @@
   },
   "packageManager": "yarn@4.4.1",
   "dependencies": {
-    "@backstage/catalog-model": "^1.7.0"
+    "@backstage/catalog-model": "^1.7.0",
+    "@backstage/plugin-auth-backend": "^0.23.1"
   }
 }

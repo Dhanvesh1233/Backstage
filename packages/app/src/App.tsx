@@ -111,6 +111,7 @@ const routes = (
 
     {/* Add your plugin route */}
     <Route path="/plugin-page" element={<PluginPagePage />} />
+    
   </FlatRoutes>
 );
 
