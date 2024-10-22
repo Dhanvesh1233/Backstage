@@ -56,6 +56,11 @@
   "packageManager": "yarn@4.4.1",
   "dependencies": {
     "@backstage/catalog-model": "^1.7.0",
-    "@backstage/plugin-auth-backend": "^0.23.1"
+    "@backstage/plugin-auth-backend": "^0.23.1",
+    "@react-keycloak/web": "^3.4.0",
+    "@testing-library/dom": "^10.4.0",
+    "@types/react": "^18.3.11",
+    "keycloak-js": "^26.0.1",
+    "react-router-dom": "^6.27.0"
   }
 }
