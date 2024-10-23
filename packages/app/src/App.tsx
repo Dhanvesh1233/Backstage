@@ -38,6 +38,7 @@ import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { PluginPagePage } from 'backstage-plugin-plugin-page';
+import { FrontendPage } from 'backstage-plugin-frontend';
 
 const app = createApp({
   apis,
@@ -112,6 +113,7 @@ const routes = (
     {/* Add your plugin route */}
     <Route path="/plugin-page" element={<PluginPagePage />} />
     
+    <Route path="/frontend" element={<FrontendPage />} />
   </FlatRoutes>
 );
 
