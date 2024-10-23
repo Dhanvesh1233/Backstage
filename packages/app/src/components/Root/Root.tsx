@@ -80,11 +80,12 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
 
         {/* Add your plugin here */}
-        <SidebarItem icon={PluginIcon} to="/plugin-page" text="My Plugin" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
           {/* Items in this group will be scrollable if they run out of space */}
+          <SidebarItem icon={PluginIcon} to="/plugin-page" text="My Plugin" />
+          <SidebarItem icon={PluginIcon} to="/pricingdashboard" text="Pricing Dashboard" />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />

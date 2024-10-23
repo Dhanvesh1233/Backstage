@@ -42,6 +42,7 @@
     "@material-ui/icons": "^4.9.1",
     "backstage-plugin-frontend": "^0.1.0",
     "backstage-plugin-plugin-page": "^0.1.0",
+    "backstage-plugin-pricingdashboard": "^0.1.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
     "react-router": "^6.3.0",

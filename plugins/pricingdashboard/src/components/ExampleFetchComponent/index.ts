@@ -1,0 +1,1 @@
+export { PricingDashboard } from './ExampleFetchComponent';

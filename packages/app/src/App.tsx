@@ -39,6 +39,7 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { PluginPagePage } from 'backstage-plugin-plugin-page';
 import { FrontendPage } from 'backstage-plugin-frontend';
+import { PricingdashboardPage } from 'backstage-plugin-pricingdashboard';
 
 const app = createApp({
   apis,
@@ -114,6 +115,7 @@ const routes = (
     <Route path="/plugin-page" element={<PluginPagePage />} />
     
     <Route path="/frontend" element={<FrontendPage />} />
+    <Route path="/pricingdashboard" element={<PricingdashboardPage />} />
   </FlatRoutes>
 );
 
