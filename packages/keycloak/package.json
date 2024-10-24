@@ -29,5 +29,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "keycloak": "file:"
+  }
 }

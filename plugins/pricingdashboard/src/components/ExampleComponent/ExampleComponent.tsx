@@ -9,7 +9,7 @@ import {
   HeaderLabel,
   SupportButton,
 } from '@backstage/core-components';
-import { PricingDashboard } from '../ExampleFetchComponent';
+import { ExampleFetchComponent } from '../ExampleFetchComponent';
 
 export const ExampleComponent = () => (
   <Page themeId="tool">
@@ -23,7 +23,7 @@ export const ExampleComponent = () => (
       </ContentHeader>
       
         <Grid item>
-          <PricingDashboard /> {/* Use the imported PricingDashboard */}
+          <ExampleFetchComponent /> {/* Use the imported PricingDashboard */}
         </Grid>
   
     </Content>

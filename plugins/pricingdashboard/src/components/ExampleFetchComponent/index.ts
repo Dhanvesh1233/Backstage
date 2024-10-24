@@ -1,1 +1,1 @@
-export { PricingDashboard } from './ExampleFetchComponent';
+export { ExampleFetchComponent } from './ExampleFetchComponent';

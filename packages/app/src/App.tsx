@@ -110,12 +110,11 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
-
-    {/* Add your plugin route */}
+    {/* Add your plugin routes */}
     <Route path="/plugin-page" element={<PluginPagePage />} />
-    
-    <Route path="/frontend" element={<FrontendPage />} />
-    <Route path="/pricingdashboard" element={<PricingdashboardPage />} />
+    <Route path="/frontend" element={<FrontendPage />} />
+    <Route path="/pricingdashboard" element={<PricingdashboardPage />} />
+    {/* Removed the previous route for EditVehicle */}
   </FlatRoutes>
 );
 

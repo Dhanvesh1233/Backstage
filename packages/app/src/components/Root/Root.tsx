@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import ExtensionIcon from '@material-ui/icons/Extension';
+import ExtensionIcon from '@material-ui/icons/Extension'; // Only keep this one
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import LogoFull from './LogoFull';
@@ -29,8 +29,7 @@ import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 
 // New icon for your plugin
-import PluginIcon from '@material-ui/icons/Extension'; // Use any Material-UI icon or custom
-
+// Removed the redundant import here
 const useSidebarLogoStyles = makeStyles({
   root: {
     width: sidebarConfig.drawerWidthClosed,
@@ -84,8 +83,16 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarDivider />
         <SidebarScrollWrapper>
           {/* Items in this group will be scrollable if they run out of space */}
-          <SidebarItem icon={PluginIcon} to="/plugin-page" text="My Plugin" />
-          <SidebarItem icon={PluginIcon} to="/pricingdashboard" text="Pricing Dashboard" />
+          <SidebarItem
+            icon={ExtensionIcon}
+            to="/plugin-page"
+            text="My Plugin"
+          />
+          <SidebarItem
+            icon={ExtensionIcon}
+            to="/pricingdashboard"
+            text="Pricing Dashboard"
+          />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />
