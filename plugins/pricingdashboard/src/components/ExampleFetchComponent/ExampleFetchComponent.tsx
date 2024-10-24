@@ -39,29 +39,37 @@ const EditForm: React.FC<{
 }> = ({ row, onSave, onCancel }) => {
   const [editingRow, setEditingRow] = useState<VehicleDetails>(row);
 
-  const handleChange = (field: keyof VehicleDetails, value: string | number) => {
+  const handleChange = (
+    field: keyof VehicleDetails,
+    value: string | number,
+  ) => {
     setEditingRow({ ...editingRow, [field]: value });
   };
 
   const handleSubmit = async () => {
-    await fetch(`http://localhost:8080/api/vehicleGroup/updateVehicle/${editingRow.serialNo}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+    await fetch(
+      `http://localhost:8080/api/vehicleGroup/updateVehicle/${editingRow.serialNo}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editingRow),
       },
-      body: JSON.stringify(editingRow),
-    });
+    );
     onSave(editingRow);
   };
 
   return (
-    <div style={{
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      padding: '16px',
-      backgroundColor: '#f9f9f9',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    }}>
+    <div
+      style={{
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        padding: '16px',
+        backgroundColor: '#f9f9f9',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      }}
+    >
       <TextField
         label="Vehicle Group"
         value={editingRow.vehicleGroup}
@@ -69,46 +77,77 @@ const EditForm: React.FC<{
           readOnly: true,
         }}
         fullWidth
+        variant="outlined" // Ensure variant is applied
+        InputLabelProps={{ shrink: true}} // Keep label from overlapping
+        style={{ marginBottom: '16px' }} // Add spacing between fields
       />
+
       <TextField
         label="Description"
         value={editingRow.description}
-        onChange={(e) => handleChange('description', e.target.value)}
+        onChange={e => handleChange('description', e.target.value)}
         fullWidth
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
+
       <TextField
         label="Price Per KM After Base KMS"
         type="text"
         value={editingRow.pricePerKM}
-        onChange={(e) => handleChange('pricePerKM', formatPrice(e.target.value))}
+        onChange={e => handleChange('pricePerKM', formatPrice(e.target.value))}
         fullWidth
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
+
       <TextField
         label="Waiting Price Per Minute(s)"
         type="text"
         value={editingRow.waitingPrice}
-        onChange={(e) => handleChange('waitingPrice', formatPrice(e.target.value))}
+        onChange={e =>
+          handleChange('waitingPrice', formatPrice(e.target.value))
+        }
         fullWidth
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
+
       <TextField
         label="Waiting Time(Mins)"
         type="number"
         value={editingRow.waitingTime}
-        onChange={(e) => handleChange('waitingTime', Number(e.target.value))}
+        onChange={e => handleChange('waitingTime', Number(e.target.value))}
         fullWidth
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
+
       <TextField
         label="Waiting Grace Time(Mins)"
         type="number"
         value={editingRow.waitingGrace}
-        onChange={(e) => handleChange('waitingGrace', Number(e.target.value))}
+        onChange={e => handleChange('waitingGrace', Number(e.target.value))}
         fullWidth
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
+
       <div style={{ margin: '8px 0' }} />
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Save
       </Button>
-      <Button variant="contained" color="secondary" onClick={onCancel} style={{ marginLeft: '8px' }}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={onCancel}
+        style={{ marginLeft: '8px' }}
+      >
         Cancel
       </Button>
     </div>
@@ -125,7 +164,7 @@ export const DenseTable: React.FC<DenseTableProps> = ({ pricing }) => {
 
   const handleSave = (updatedRow: VehicleDetails) => {
     const updatedData = data.map(item =>
-      item.serialNo === updatedRow.serialNo ? updatedRow : item
+      item.serialNo === updatedRow.serialNo ? updatedRow : item,
     );
     setData(updatedData);
     setEditingRow(null);
@@ -155,7 +194,11 @@ export const DenseTable: React.FC<DenseTableProps> = ({ pricing }) => {
       {editingRow ? (
         <div>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link color="primary" onClick={() => setEditingRow(null)} style={{ fontWeight: 'bold' }}>
+            <Link
+              color="primary"
+              onClick={() => setEditingRow(null)}
+              style={{ fontWeight: 'bold' }}
+            >
               Vehicle Group Details
             </Link>
             <span>Edit Vehicle Group</span>
@@ -172,7 +215,10 @@ export const DenseTable: React.FC<DenseTableProps> = ({ pricing }) => {
           options={{ search: true, paging: true, sorting: false }}
           columns={columns}
           data={data}
-          style={{ backgroundColor: '#f9f9f9', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }} // Same styling as the edit form
+          style={{
+            backgroundColor: '#f9f9f9',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          }} // Same styling as the edit form
         />
       )}
     </div>
@@ -180,8 +226,12 @@ export const DenseTable: React.FC<DenseTableProps> = ({ pricing }) => {
 };
 
 export const ExampleFetchComponent: React.FC = () => {
-  const { value, loading, error } = useAsync(async (): Promise<VehicleDetails[]> => {
-    const response = await fetch('http://localhost:8080/api/vehicleGroup/vehicleDetails'); // New API endpoint
+  const { value, loading, error } = useAsync(async (): Promise<
+    VehicleDetails[]
+  > => {
+    const response = await fetch(
+      'http://localhost:8080/api/vehicleGroup/vehicleDetails',
+    ); // New API endpoint
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
