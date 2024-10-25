@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   TableColumn,
@@ -6,7 +6,7 @@ import {
   ResponseErrorPanel,
 } from '@backstage/core-components';
 import { Button, TextField, Breadcrumbs, Link } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit'; // Check if this is correctly imported
+import EditIcon from '@material-ui/icons/Edit';
 import useAsync from 'react-use/lib/useAsync';
 
 // Function to format price in INR
@@ -28,6 +28,15 @@ type VehicleDetails = {
   waitingGrace: number;
 };
 
+type HistoryDetails = {
+  date: string;
+  description: string;
+  pricePerKM: string;
+  waitingPrice: string;
+  waitingTime: number;
+  waitingGrace: number;
+};
+
 type DenseTableProps = {
   pricing: VehicleDetails[];
 };
@@ -38,6 +47,19 @@ const EditForm: React.FC<{
   onCancel: () => void;
 }> = ({ row, onSave, onCancel }) => {
   const [editingRow, setEditingRow] = useState<VehicleDetails>(row);
+  const [history, setHistory] = useState<HistoryDetails[]>([]);
+
+  useEffect(() => {
+    // Fetch vehicle history for the row being edited
+    const fetchHistory = async () => {
+      const response = await fetch(
+        `http://localhost:8080/api/vehicleGroup/history/${row.serialNo}`,
+      );
+      const result = await response.json();
+      setHistory(result);
+    };
+    fetchHistory();
+  }, [row.serialNo]);
 
   const handleChange = (
     field: keyof VehicleDetails,
@@ -77,11 +99,10 @@ const EditForm: React.FC<{
           readOnly: true,
         }}
         fullWidth
-        variant="outlined" // Ensure variant is applied
-        InputLabelProps={{ shrink: true}} // Keep label from overlapping
-        style={{ marginBottom: '16px' }} // Add spacing between fields
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        style={{ marginBottom: '16px' }}
       />
-
       <TextField
         label="Description"
         value={editingRow.description}
@@ -91,7 +112,6 @@ const EditForm: React.FC<{
         InputLabelProps={{ shrink: true }}
         style={{ marginBottom: '16px' }}
       />
-
       <TextField
         label="Price Per KM After Base KMS"
         type="text"
@@ -102,7 +122,6 @@ const EditForm: React.FC<{
         InputLabelProps={{ shrink: true }}
         style={{ marginBottom: '16px' }}
       />
-
       <TextField
         label="Waiting Price Per Minute(s)"
         type="text"
@@ -115,7 +134,6 @@ const EditForm: React.FC<{
         InputLabelProps={{ shrink: true }}
         style={{ marginBottom: '16px' }}
       />
-
       <TextField
         label="Waiting Time(Mins)"
         type="number"
@@ -126,7 +144,6 @@ const EditForm: React.FC<{
         InputLabelProps={{ shrink: true }}
         style={{ marginBottom: '16px' }}
       />
-
       <TextField
         label="Waiting Grace Time(Mins)"
         type="number"
@@ -137,8 +154,6 @@ const EditForm: React.FC<{
         InputLabelProps={{ shrink: true }}
         style={{ marginBottom: '16px' }}
       />
-
-      <div style={{ margin: '8px 0' }} />
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Save
       </Button>
@@ -150,6 +165,24 @@ const EditForm: React.FC<{
       >
         Cancel
       </Button>
+
+      {/* History Section */}
+      <div style={{ marginTop: '24px' }}>
+        <h3>Previous History</h3>
+        <Table
+          title="Vehicle History"
+          options={{ search: false, paging: false }}
+          columns={[
+            { title: 'Date', field: 'date' },
+            { title: 'Description', field: 'description' },
+            { title: 'Price Per KM', field: 'pricePerKM' },
+            { title: 'Waiting Price', field: 'waitingPrice' },
+            { title: 'Waiting Time', field: 'waitingTime' },
+            { title: 'Waiting Grace', field: 'waitingGrace' },
+          ]}
+          data={history}
+        />
+      </div>
     </div>
   );
 };
@@ -218,7 +251,7 @@ export const DenseTable: React.FC<DenseTableProps> = ({ pricing }) => {
           style={{
             backgroundColor: '#f9f9f9',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          }} // Same styling as the edit form
+          }}
         />
       )}
     </div>
@@ -231,7 +264,7 @@ export const ExampleFetchComponent: React.FC = () => {
   > => {
     const response = await fetch(
       'http://localhost:8080/api/vehicleGroup/vehicleDetails',
-    ); // New API endpoint
+    );
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
